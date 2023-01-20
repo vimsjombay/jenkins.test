@@ -20,5 +20,11 @@ pipeline {
       }
     }
 
+    stage('Create Docker') {
+      steps {
+        build(job: 'IntervalJob', propagate: true, quietPeriod: 4, wait: true)
+      }
+    }
+
   }
 }
