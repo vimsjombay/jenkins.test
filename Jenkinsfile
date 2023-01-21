@@ -20,9 +20,22 @@ pipeline {
       }
     }
 
-    stage('Create Docker') {
-      steps {
-        build(job: 'IntervalJob', propagate: true, quietPeriod: 4, wait: true)
+    stage('Deploy') {
+      parallel {
+        stage('Deploy') {
+          steps {
+            sh 'echo "Hello: Deploy"'
+            echo 'After Deploy'
+            sleep 10
+          }
+        }
+
+        stage('Watch Logs') {
+          steps {
+            echo 'Deployment logs'
+          }
+        }
+
       }
     }
 
